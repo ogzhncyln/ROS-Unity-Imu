@@ -33,7 +33,7 @@ public class ImuPublisher : MonoBehaviour
     {
         ImuMsg imuMsg = new ImuMsg();
 
-        imuMsg.header.stamp = new RosMessageTypes.BuiltinInterfaces.TimeMsg(ROSClock._message.clock.sec,ROSClock._message.clock.nanosec);
+        imuMsg.header.stamp = new RosMessageTypes.BuiltinInterfaces.TimeMsg((uint)Time.time, (uint)((Time.time - (int)Time.time) * 1e9));
         imuMsg.header.frame_id = "imu_link";
 
         imuMsg.linear_acceleration.x = imuSensor.linearAcceleration.x;
