@@ -3,11 +3,12 @@ using System;
 
 public class ImuSensor : MonoBehaviour
 {
-    public Vector3 linearAcceleration;  
-    public Vector3 angularVelocity;     
+    [HideInInspector]
+    public Vector3 linearAcceleration;
+    [HideInInspector]  
+    public Vector3 angularVelocity;
+    [HideInInspector]     
     public Quaternion orientation;      
-
-    public float gravity;
 
     private Vector3 lastVelocity;
     private Vector3 lastPosition;
@@ -25,8 +26,8 @@ public class ImuSensor : MonoBehaviour
         Vector3 currentPosition = transform.position;
         Vector3 currentVelocity = (currentPosition - lastPosition) / Time.fixedDeltaTime;
         linearAcceleration = (currentVelocity - lastVelocity) / Time.fixedDeltaTime;
-
-        linearAcceleration.y = gravity;
+        
+        linearAcceleration.y = Physics.gravity.y;
 
         linearAcceleration = transform.InverseTransformDirection(linearAcceleration);
 
